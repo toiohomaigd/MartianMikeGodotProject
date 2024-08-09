@@ -11,13 +11,30 @@ func _physics_process(delta):
 	
 	# move player left and right
 	var direction = Input.get_axis("Left", "Right")
+	if direction !=0:
+		animated_sprite.flip_h = (direction == -1)
+		
 	velocity.x = direction * speed
 	
 	# jump
-	if Input.is_action_just_pressed("Jump"):
+	if Input.is_action_just_pressed("Jump") && is_on_floor():
 		velocity.y = -jump_force
-		
+			
+	
 	move_and_slide()
+	update_animations(direction)
+	
+func update_animations(direction):
+	if is_on_floor():
+		if direction == 0:
+			animated_sprite.play("idle")
+		else:
+			animated_sprite.play("run")
+	else:
+		if velocity.y < 0:
+			animated_sprite.play("jump")
+		else:
+			animated_sprite.play("fall")
 	
 	
 
