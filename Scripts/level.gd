@@ -4,6 +4,13 @@ extends Node2D
 
 @onready var player = $Player
 
+func _ready():
+	var traps = get_tree().get_nodes_in_group("traps")
+	var on_trap_touched = Callable(self, "_on_trap_touched_player")
+	
+	for trap in traps:
+		trap.connect("touched_player", on_trap_touched)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# quit or reload level
