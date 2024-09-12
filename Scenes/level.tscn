@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://conmhluwaqfep"]
+[gd_scene load_steps=11 format=3 uid="uid://conmhluwaqfep"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_1xbek"]
 [ext_resource type="PackedScene" uid="uid://b2qp2s6qbap0" path="res://Scenes/player.tscn" id="2_3xsb7"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://rofpxpvs5vgd" path="res://Scenes/tile_map.tscn" id="6_sy0ow"]
 [ext_resource type="PackedScene" uid="uid://ditv6nfaybymo" path="res://Scenes/background.tscn" id="7_b8nqh"]
 [ext_resource type="Texture2D" uid="uid://c8codkdq4tkkw" path="res://textures/bg/Green.png" id="8_lvter"]
+[ext_resource type="PackedScene" uid="uid://cfsn6mshm6022" path="res://Scenes/start.tscn" id="9_nc75q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wea18"]
 size = Vector2(5975, 17)
@@ -40,9 +41,6 @@ collision_mask = 2
 position = Vector2(2555.5, 246)
 shape = SubResource("RectangleShape2D_wea18")
 
-[node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(-88, 156)
-
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="JumpPad" parent="Objects" instance=ExtResource("4_6xqnk")]
@@ -60,5 +58,8 @@ layer_0/tile_data = PackedInt32Array(524277, 0, 0, 589813, 0, 1, 655349, 0, 2, 5
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("7_b8nqh")]
 bg_texture = ExtResource("8_lvter")
+
+[node name="Start" parent="." instance=ExtResource("9_nc75q")]
+position = Vector2(-90, 171)
 
 [connection signal="body_entered" from="Deathzone" to="." method="_on_deathzone_body_entered"]
