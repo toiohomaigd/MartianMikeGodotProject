@@ -7,21 +7,26 @@ class_name Player
 @export var speed = 125
 @export var jump_force = 200
 
+var active = true
+
 func _physics_process(delta):
 	# player will drop down the Y axis every FPS
 	velocity.y += gravity * delta
 	
-	# move player left and right
-	var direction = Input.get_axis("Left", "Right")
+	var direction = 0
+	
+	if active == true:
+		# move player left and right
+		direction = Input.get_axis("Left", "Right")
+		# jump
+		if Input.is_action_just_pressed("Jump") && is_on_floor():
+			jump(jump_force)
+	
+	
 	if direction !=0:
 		animated_sprite.flip_h = (direction == -1)
 		
-	velocity.x = direction * speed
-	
-	# jump
-	if Input.is_action_just_pressed("Jump") && is_on_floor():
-		jump(jump_force)
-			
+	velocity.x = direction * speed	
 	
 	move_and_slide()
 	update_animations(direction)
